@@ -6,9 +6,9 @@ El **Datatype Channel** es un patrón de integración empresarial que se utiliza
 
 ## ¿Qué es un Datatype Channel?
 
-Es un canal de mensajería en una arquitectura de integración (por ejemplo, con **Apache Camel**, **MuleSoft** o patrones **EIP**) que transporta mensajes con un tipo de dato específico.
+Es un canal de mensajería en una arquitectura de integración que transporta mensajes con un tipo de dato específico.
 
-En otras palabras, cada canal está especializado para transportar mensajes que cumplen un formato o estructura de datos particular, como **XML**, **JSON**, objetos Java, etc.
+En otras palabras, cada canal está especializado para transportar mensajes que cumplen un formato o estructura de datos particular, como XML, JSON, objetos Java, etc.
 
 ## ¿Cómo funciona?
 

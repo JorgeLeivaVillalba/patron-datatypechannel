@@ -15,7 +15,7 @@ public class DatatypeChannelRoute extends RouteBuilder {
         from("direct:jsonFacturaChannel")
             .routeId("jsonFacturaRoute")
             .doTry()
-                .unmarshal().json(Factura.class)
+                .unmarshal().json(Factura.class) //Transforma el JSON a un objeto Factura
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
@@ -37,7 +37,7 @@ public class DatatypeChannelRoute extends RouteBuilder {
         from("direct:xmlProductoChannel")
             .routeId("xmlProductoRoute")
             .doTry()
-                .unmarshal().jaxb(Producto.class.getPackage().getName())
+                .unmarshal().jaxb(Producto.class.getPackage().getName()) //transforma el XML a un objeto Producto
 
                 .process(new Processor() {
                     @Override
@@ -57,12 +57,12 @@ public class DatatypeChannelRoute extends RouteBuilder {
             .end();
 
         // GENERADOR DE MENSAJES
-        from("timer://messageTimer?period=5000")
+        from("timer://messageTimer?period=5000") // cada 5 segundos
             .routeId("messageGenerator")
             .process(exchange -> {
-                long time = System.currentTimeMillis() / 1000;
-                if (time % 2 == 0) { // si es un numero par
-                    // Mensaje válido
+                // Usa Math.random() para decidir aleatoriamente si enviar mensajes válidos o inválidos
+                boolean enviarValidos = Math.random() < 0.4; // 60% de probabilidad
+                if (enviarValidos) { // Mensajes válidos
                     exchange.getContext().createProducerTemplate().sendBody("direct:jsonFacturaChannel",
                         """
                         {"numero": "F100", "monto": 1000.0}
@@ -73,8 +73,7 @@ public class DatatypeChannelRoute extends RouteBuilder {
                         <producto><codigo>P123</codigo><descripcion>Mouse</descripcion></producto>
                         """
                     );
-                } else {
-                    // Mensaje inválido
+                } else { // Mensajes inválidos
                     exchange.getContext().createProducerTemplate().sendBody("direct:jsonFacturaChannel",
                         """
                         {"monto": -50}

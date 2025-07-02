@@ -3,7 +3,7 @@ package com.example.model;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAccessType;
-
+//Modelo de producto
 @XmlRootElement(name = "producto")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Producto {
