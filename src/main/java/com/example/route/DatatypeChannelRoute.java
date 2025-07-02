@@ -61,7 +61,7 @@ public class DatatypeChannelRoute extends RouteBuilder {
             .routeId("messageGenerator")
             .process(exchange -> {
                 // Usa Math.random() para decidir aleatoriamente si enviar mensajes válidos o inválidos
-                boolean enviarValidos = Math.random() < 0.4; // 60% de probabilidad
+                boolean enviarValidos = Math.random() < 0.5; // 50% de probabilidad
                 if (enviarValidos) { // Mensajes válidos
                     exchange.getContext().createProducerTemplate().sendBody("direct:jsonFacturaChannel",
                         """
